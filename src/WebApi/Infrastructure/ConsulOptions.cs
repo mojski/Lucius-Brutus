@@ -1,4 +1,4 @@
-﻿namespace LuciusBrutus.WebApi;
+﻿namespace LuciusBrutus.WebApi.Infrastructure;
 
 public sealed class ConsulOptions
 {

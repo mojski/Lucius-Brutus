@@ -6,7 +6,7 @@ builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
-app.MapHealthChecks("");
+app.MapHealthChecks("/health");
 
 app.RegisterConsulAgentOnStart();
 app.DeregisterConsulAgentOnStop();

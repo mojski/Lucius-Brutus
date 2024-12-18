@@ -3,16 +3,18 @@ services:
     build: ./src
     image: lucius-brutus:local
     environment:
-      CONSUL__ADDRESS: "http://localhost:8500"
-      CONSUL__ENVIRONMENT: "Kutas"
-      CONSUL__SERVICENAME: "Lucius-Brutus"
+      CONSUL__ADDRESS: "http://host.docker.internal:8500"
+      CONSUL__ENVIRONMENT: "Development"
+      CONSUL__SERVICENAME: "LuciusBrutus"
       CONSUL__SERVICPORT: 8500
       CONSUL__SERVICEADDRESS: "localhost"
-      CONSUL__SERVICEHEALTHCHECKADDRESS: "http://localhost:5080/health"
+      CONSUL__SERVICEHEALTHCHECKADDRESS: "http://lucius/health"
+    depends_on:
+      - consul
     networks:
       - consul
     ports:
-      - "5081:5080"
+      - "5080:5080"
   consul:
     image: hashicorp/consul:latest
     networks:

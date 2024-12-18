@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY LuciusBrutus.WebApi/LuciusBrutus.WebApi.csproj LuciusBrutus.WebApi.csproj  
+COPY WebApi/LuciusBrutus.WebApi.csproj LuciusBrutus.WebApi.csproj  
 RUN dotnet restore
 
 COPY . .
