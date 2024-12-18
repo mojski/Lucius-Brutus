@@ -42,7 +42,7 @@ public static class WebApplicationExtensions
                 Name = options.ServiceName,
                 Address = options.ServiceAddress,
                 Port = options.ServicePort,
-                //Tags = options.ServiceTags,
+                Tags = options.ServiceTags,
                 Check = new AgentServiceCheck
                 {
                     HTTP = options.ServiceHealthCheckAddress,
@@ -51,7 +51,15 @@ public static class WebApplicationExtensions
                 },
             };
 
-            consulClient.Agent.ServiceDeregister(registration.ID).Wait();
+            try
+            {
+                consulClient.Agent.ServiceDeregister(registration.ID).Wait();
+            }
+            catch
+            {
+                // ignored
+            }
+
             consulClient.Agent.ServiceRegister(registration).Wait();
         });
     }
