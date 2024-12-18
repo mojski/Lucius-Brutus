@@ -1,9 +1,31 @@
 services:
+  lucius:
+    build: ./src
+    image: lucius-brutus:local
+    environment:
+      CONSUL__ADDRESS: "http://localhost:8500"
+      CONSUL__ENVIRONMENT: "Kutas"
+      CONSUL__SERVICENAME: "Lucius-Brutus"
+      CONSUL__SERVICPORT: 8500
+      CONSUL__SERVICEADDRESS: "localhost"
+      CONSUL__SERVICEHEALTHCHECKADDRESS: "http://localhost:5080/health"
+    networks:
+      - consul
+    ports:
+      - "5081:5080"
   consul:
     image: hashicorp/consul:latest
-    environment:
-      ACCEPT_EULA: "Y"
+    networks:
+      - consul
     ports:
       - "8500:8500"
       - "8600:8600/udp"
+    extra_hosts:
+      - host.docker.internal:host-gateway
     restart: always
+
+networks:
+  consul:
+    name: consul
+    driver: bridge
+

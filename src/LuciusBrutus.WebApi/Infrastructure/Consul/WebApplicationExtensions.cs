@@ -34,7 +34,7 @@ public static class WebApplicationExtensions
                 options.Environment = $"{app.Environment.EnvironmentName}";
             }
 
-            var serviceId = $"{options.Environment}_{options.ServiceName}_{options.ServiceAddress}:{options.ServicePort}";
+            var serviceId = $"{options.Environment}-{options.ServiceName}-{options.ServiceAddress}-{options.ServicePort}";
 
             var registration = new AgentServiceRegistration
             {
@@ -42,7 +42,13 @@ public static class WebApplicationExtensions
                 Name = options.ServiceName,
                 Address = options.ServiceAddress,
                 Port = options.ServicePort,
-                Tags = options.ServiceTags,
+                //Tags = options.ServiceTags,
+                Check = new AgentServiceCheck
+                {
+                    HTTP = options.ServiceHealthCheckAddress,
+                    Interval = TimeSpan.FromSeconds(10),
+                    Timeout = TimeSpan.FromSeconds(1),
+                },
             };
 
             consulClient.Agent.ServiceDeregister(registration.ID).Wait();

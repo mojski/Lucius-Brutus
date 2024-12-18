@@ -9,5 +9,5 @@ public sealed class ConsulOptions
     public string ServiceHealthCheckAddress { get; init; } = string.Empty;
     public string ServiceName { get; init; } = string.Empty;
     public int ServicePort { get; init; } = 8500;
-    public string[] ServiceTags { get; set; } = default!;
+    public string[] ServiceTags { get; init; } = default!;
 }
