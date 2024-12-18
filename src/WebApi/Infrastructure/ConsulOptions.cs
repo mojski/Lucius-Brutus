@@ -10,4 +10,11 @@ public sealed class ConsulOptions
     public string ServiceName { get; init; } = string.Empty;
     public int ServicePort { get; init; } = 8500;
     public string[] ServiceTags { get; init; } = default!;
+
+    public string GetServiceId()
+    {
+        var serviceId = $"{this.Environment}-{this.ServiceName}-{this.ServiceAddress}-{this.ServicePort}";
+
+        return serviceId;
+    }
 }

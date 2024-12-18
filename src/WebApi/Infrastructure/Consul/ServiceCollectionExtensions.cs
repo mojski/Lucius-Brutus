@@ -2,7 +2,7 @@
 
 using global::Consul;
 
-public static class ConsulExtensions
+public static class ServiceCollectionExtensions
 {
     public static void AddConsul(this IServiceCollection services, IConfiguration configuration)
     {
