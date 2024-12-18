@@ -17,7 +17,7 @@ public static class WebApplicationExtensions
                 options.Environment = $"{app.Environment.EnvironmentName}";
             }
 
-            var serviceId = options.GetServiceId();
+            var serviceId = options.BuildServiceId();
             consulClient.Agent.ServiceDeregister(serviceId).Wait();
         });
     }
@@ -34,7 +34,7 @@ public static class WebApplicationExtensions
                 options.Environment = $"{app.Environment.EnvironmentName}";
             }
 
-            var serviceId = options.GetServiceId();
+            var serviceId = options.BuildServiceId();
 
             var registration = new AgentServiceRegistration
             {

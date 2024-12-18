@@ -4,7 +4,7 @@ using global::Consul;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddConsul(this IServiceCollection services, IConfiguration configuration)
+    public static void AddConsulClient(this IServiceCollection services, IConfiguration configuration)
     {
         var options = configuration.GetSection(ConsulOptions.SECTION_NAME).Get<ConsulOptions>();
         options ??= new ConsulOptions();
