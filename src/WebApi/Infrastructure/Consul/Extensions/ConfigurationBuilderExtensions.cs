@@ -1,4 +1,4 @@
-﻿namespace LuciusBrutus.WebApi.Infrastructure.Consul;
+﻿namespace LuciusBrutus.WebApi.Infrastructure.Consul.Extensions;
 
 using Winton.Extensions.Configuration.Consul;
 

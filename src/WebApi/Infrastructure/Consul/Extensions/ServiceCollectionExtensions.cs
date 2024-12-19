@@ -1,4 +1,4 @@
-﻿namespace LuciusBrutus.WebApi.Infrastructure.Consul;
+﻿namespace LuciusBrutus.WebApi.Infrastructure.Consul.Extensions;
 
 using global::Consul;
 
@@ -9,9 +9,9 @@ public static class ServiceCollectionExtensions
         var options = configuration.GetSection(ConsulOptions.SECTION_NAME).Get<ConsulOptions>();
         options ??= new ConsulOptions();
 
-        services.Configure<ConsulOptions>(configuration.GetSection(ConsulOptions.SECTION_NAME));
+        services.AddSingleton(_ => options);
 
-        services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
+        services.AddSingleton<IConsulClient, ConsulClient>(_ => new ConsulClient(consulConfig =>
         {
             consulConfig.Address = new Uri(options.Address);
         }));
