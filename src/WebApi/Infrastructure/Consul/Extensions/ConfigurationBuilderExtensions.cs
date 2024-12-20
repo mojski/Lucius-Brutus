@@ -16,7 +16,7 @@ public static class ConfigurationBuilderExtensions
             {
                 options.ConsulConfigurationOptions = cco => cco.Address = new Uri(consulOptions.Address);
                 options.Optional = true;
-                options.PollWaitTime = TimeSpan.FromSeconds(5);
+                options.PollWaitTime = TimeSpan.FromSeconds(consulOptions.PollWaitTimeInSeconds);
                 options.ReloadOnChange = true;
             });
     }

@@ -2,39 +2,30 @@
 
 public sealed class ConsulOptions
 {
-    private const string ENVIRONMENT_VARIABLE_KEY = "ASPNETCORE_ENVIRONMENT";
-
     public const string SECTION_NAME = "Consul";
+    private const string SERVICE_NAME = "LuciusBrutus";
+    private const string SERVICE_VERSION = "1.0";
 
     public string Address { get; init; } = "http://localhost:8500";
-
-    private string Environment { get; } = GetEnvironment();
-
+    public string InstanceName { get; init; } = "local";
+    public int PollWaitTimeInSeconds { get; init; } = 5;
     public string ServiceAddress { get; init; } = string.Empty;
     public string ServiceHealthCheckAddress { get; init; } = string.Empty;
-    public string ServiceName { get; init; } = string.Empty;
+    public string ServiceName => SERVICE_NAME;
     public int ServicePort { get; init; } = 8500;
     public string[] ServiceTags { get; init; } = default!;
-    private string ServiceVersion { get; init; } = string.Empty;
 
     public string BuildKey()
     {
-        var serviceKey = $"{this.Environment}/{this.ServiceName}";
+        var serviceKey = $"{this.InstanceName}/{SERVICE_NAME}";
 
         return serviceKey;
     }
 
     public string BuildServiceId()
     {
-        var serviceId = $"{this.Environment}-{this.ServiceName}-{this.ServiceVersion}-{this.ServiceAddress}-{this.ServicePort}";
+        var serviceId = $"{this.InstanceName}-{SERVICE_NAME}-{SERVICE_VERSION}-{this.ServiceAddress}-{this.ServicePort}";
 
         return serviceId;
-    }
-
-    private static string GetEnvironment()
-    {
-        var environment = System.Environment.GetEnvironmentVariable(ENVIRONMENT_VARIABLE_KEY);
-
-        return environment ?? "Development";
     }
 }
